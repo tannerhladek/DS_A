@@ -3,7 +3,7 @@
  * @return {number}
  */
 
-// most efficient solution (pointers never move backwards)
+// most efficient solution - optimized sliding window - (pointers never move backwards)
 var lengthOfLongestSubstring = function (s) {
    let l = r = maxSum = 0;
    let tracker = {};
@@ -21,11 +21,6 @@ var lengthOfLongestSubstring = function (s) {
    }
    return maxSum
 };
-
-
-
-
-
 
 
 
