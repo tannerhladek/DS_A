@@ -4,13 +4,17 @@
  */
 
 // optimized
+/**
+ * @param {string} s
+ * @return {string}
+ */
 var longestPalindrome = function (s) {
    let max = [0, 1]
 
    for (let i = 0; i < s.length; i++) {
-      let odd = isPalindrome(s, i - 1, i + 1)
       let even = isPalindrome(s, i - 1, i)
-      let cur = odd[1] - odd[0] > even[1] - even[0] ? odd : even
+      let odd = isPalindrome(s, i - 1, i + 1)
+      let cur = even[1] - even[0] > odd[1] - odd[0] ? even : odd
       max = cur[1] - cur[0] > max[1] - max[0] ? cur : max
    }
 
@@ -19,13 +23,19 @@ var longestPalindrome = function (s) {
 
 
 const isPalindrome = (s, l, r) => {
-   while (l >= 0 && r < s.length) {
-      if (s[l] !== s[r]) break
-      l--
-      r++
+   let left = l
+   let right = r
+
+   while (left >= 0 && right < s.length && s[left] === s[right]) {
+      left--;
+      right++;
    }
-   return [l + 1, r]
+
+   return [left + 1, right]
 }
+
+
+
 
 // // brute force O(n^3)
 // var longestPalindrome = function (s) {
