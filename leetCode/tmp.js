@@ -1,33 +1,27 @@
-const numberOfTimes = (string, start, end) => {
-   if (!string) return []
 
-   let tracker = {}
-   let left = 0
-
-   let firstComp = false
-   let count = 0
-
-   // generate compartment tracker
-   for (let i = 0; i < string.length; i++) {
-      // encountering first pipe (compartment)
-      if (string[i] === '|' && !firstComp) {
-         firstComp = true
-         left = i
-         count = 0
-         continue
-      }
-
-      if (string[i] === '|' && firstComp) {
-         tracker[i] = count
-         left = i
-      } else if (firstComp && string[i] === '*') {
-         count++
-      }
+var canJump = function (nums, i = 0, memo = {}) {
+   // base cases
+   debugger
+   if (i in memo) return memo[i]
+   if (i >= nums.length - 1) return true
+   if (nums[i] === 0) {
+      return false
    }
 
+   let maxSteps = nums[i]
+   while (maxSteps > 0) {
+      debugger
+      if (canJump(nums, i + maxSteps, memo)) {
+         memo[i] = true
+         return memo[i]
+      }
+      maxSteps--
+   }
 
-   let
-}
+   memo[i] = false
+   debugger
+   return memo[i]
+};
 
-
-console.log(numberOfTimes('|**|**|*'));
+const nums = [3,2,1,0,4]
+canJump(nums)
