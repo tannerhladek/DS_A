@@ -21,3 +21,24 @@ var lengthOfLongestSubstring = function(s) {
 
   return max
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    let left = right = max = 0
+    const tracker = {}
+
+    while (right < s.length) {
+        if (s[right] in tracker && tracker[s[right]] >= left) {
+            left = tracker[s[right]] + 1
+        }
+
+        tracker[s[right]] = right
+        max = Math.max(max, right - left + 1)
+        right++
+    }
+
+    return max
+};
