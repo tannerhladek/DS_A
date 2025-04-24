@@ -105,3 +105,96 @@ class LinkedList {
     return res;
   }
 }
+
+// attempt 2
+class ListNode {
+  constructor(val, nextNode = null) {
+    this.val = val;
+    this.nextNode = nextNode;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = new ListNode(-1); // init with placeholder ListNode
+    this.tail = this.head;
+  }
+
+  /**
+   * @param {number} index
+   * @return {number}
+   */
+  get(index) {
+    let cur = this.head.nextNode;
+    let i = 0;
+    while (cur) {
+      if (i === index) {
+        return cur.val;
+      }
+      cur = cur.nextNode;
+      i++;
+    }
+
+    return -1;
+  }
+
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  insertHead(val) {
+    const curHead = this.head.nextNode;
+    const newNode = new ListNode(val, curHead);
+    this.head.nextNode = newNode;
+
+    if (!newNode.nextNode) {
+      this.tail = newNode;
+    }
+  }
+
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  insertTail(val) {
+    this.tail.nextNode = new ListNode(val);
+    this.tail = this.tail.nextNode;
+  }
+
+  /**
+   * @param {number} index
+   * @return {boolean}
+   */
+  remove(index) {
+    let i = 0;
+    let cur = this.head; // start here as we need access to previous
+
+    while (cur && i < index) {
+      i++;
+      cur = cur.nextNode;
+    }
+
+    if (cur && cur.nextNode) {
+      if (cur.nextNode === this.tail) {
+        this.tail = cur;
+      }
+      cur.nextNode = cur.nextNode.nextNode;
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @return {number[]}
+   */
+  getValues() {
+    let cur = this.head.nextNode;
+    const res = [];
+    while (cur) {
+      res.push(cur.val);
+      cur = cur.nextNode;
+    }
+    return res;
+  }
+}
